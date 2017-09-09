@@ -1,0 +1,454 @@
+wait(2.5)
+--	Players
+local pla = game.Workspace:FindFirstChild("hudsonreylavida2014")
+if game.Workspace:FindFirstChild("hudsonreylavida2014") == nil then
+	print("Finding.....")
+	pla =  game.Workspace:FindFirstChild("Smore_Kettle")
+	wait(0.5)
+	if game.Workspace:FindFirstChild("Smore_Kettle") == nil then
+		print("Fidning...")
+		pla = game.Workspace:FindFirstChild("Player1")
+		wait(0.5)
+		if game.Workspace:FindFirstChild("Player1") == nil then
+			print("Finding.")
+		end
+	end
+end
+--	Player's Health
+pla:FindFirstChildOfClass("Humanoid").MaxHealth = 2000
+wait()
+pla:FindFirstChildOfClass("Humanoid").Health = 2000
+
+
+-------Moves
+--	Grabbing
+local grabbed = false
+
+--	Sheild
+local sheild = 0
+local sh = false
+
+--	Spin Defense!
+local med = 0
+-------End of Moves
+
+--	Tools and Val
+local cf = CFrame.new
+local cr = CFrame.Angles
+local kill = false
+local dash = false
+tool = Instance.new("Tool")
+tool.Parent = workspace
+tool.Name = "Samurai Sword"
+tool.ToolTip = "Samurai SLICE THAT LIKE BUTTON!"
+
+
+
+--	Instance of the part
+local part = Instance.new("Part")
+part.Anchored = true
+part.CanCollide = false
+
+-- Fake torso
+local tor = part:Clone()
+tor.Size = Vector3.new(2, 2, 1)
+tor.Name = "Chest"
+tor.Transparency = 1
+tor.Parent = pla
+--	Glue for fake torso
+local gup = Instance.new("Weld")
+gup.Name = "Shoes"
+gup.Parent = tor
+gup.Part0 = pla:FindFirstChild("Torso")
+gup.Part1 = tor
+tor.Anchored = false
+--	Bricks
+local pointy = Instance.new("WedgePart")
+pointy.Name = "Edge"
+pointy.Anchored = true
+pointy.Position = Vector3.new(20.75, 11.5, -22.75)
+pointy.BrickColor = BrickColor.new("New Yeller")
+pointy.Size = Vector3.new(0.5, 1, 0.5)
+pointy.Parent = tool
+
+local body = part:Clone()
+body.Name = "Body"
+body.Size = Vector3.new(0.5, 3, 0.5)
+body.Position = Vector3.new(20.75, 9.5, -22.75)
+body.BrickColor = BrickColor.new("New Yeller")
+body.Parent = tool
+
+local br = part:Clone()
+br.TopSurface = "Smooth"
+br.BottomSurface = "Smooth"
+br.Name = "Lead"
+br.Position = Vector3.new(20.75, 7.75, -22.75)
+br.Size = Vector3.new(1.5, 0.5, 1.5)
+br.BrickColor = BrickColor.Black()
+br.Parent = tool
+
+local hold = part:Clone()
+hold.Name = "Handle"
+hold.Position = Vector3.new(20.75, 7, -22.75)
+hold.Size = Vector3.new(0.5, 1, 0.5)
+hold.BottomSurface = "Smooth"
+hold.BrickColor = BrickColor.Black()
+hold.Parent = tool
+
+----	Welding		----
+local bricker = tool:GetChildren()
+
+for i, bricks in pairs(bricker) do
+	if bricks.ClassName == "Part" then
+		if bricks.Name ~= "Handle" then
+			local weld = Instance.new("Weld")
+			weld.Name = "GLUE"
+			weld.Parent = tool
+			weld.Part0 = bricks
+			weld.Part1 = tool.Handle
+			weld.C0 = bricks.CFrame:inverse()
+			weld.C1 = tool.Handle.CFrame:inverse()
+			--	Anchored & CanCollide = CanCored
+			bricks.Anchored = false
+			bricks.CanCollide = false
+		end
+		elseif bricks.ClassName == "WedgePart" then
+		wait(1)
+		local weld = Instance.new("Weld")
+		weld.Name = "GLUE"
+		weld.Parent = tool
+		weld.Part0 = bricks
+		weld.Part1 = tool.Handle
+		weld.C0 = bricks.CFrame:inverse()
+		weld.C1 = tool.Handle.CFrame:inverse()
+		--	Anchored & CanCollide = CanCored
+		bricks.Anchored = false
+		bricks.CanCollide = false
+	end
+end
+
+tool.Handle.Anchored = false
+tool.Parent = pla
+
+
+pointy.CanCollide = false
+body.CanCollide = false
+
+
+--	Functions and More
+
+tool.Equipped:connect(function (mouse)
+	--	User or a player using this tool
+	local used = tool.Parent
+	local root = used.HumanoidRootPart
+	local user = tool.Parent.Torso
+	--	Arms
+	local left = user["Left Shoulder"]
+	local right = user["Right Shoulder"]
+	
+	--	Legs
+	local legR = user["Right Hip"]
+	local legL = user["Left Hip"]
+	
+	--	Super Stuff
+	left.Part0 = tor
+	right.Part0 = tor
+	user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(80), math.rad(20))
+	user["Left Shoulder"].C1 = CFrame.new(0.5, 0.5, 0) * CFrame.Angles(0, math.rad(-70), math.rad(-40))
+	
+	
+	--	Click MB1D	-----
+	mouse.Button1Down:connect(function ()
+		kill = true
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(45), math.rad(-80))
+		wait()
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(50), math.rad(-70))
+		wait()
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(55), math.rad(-60))
+		wait()
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(60), math.rad(-50))
+		wait()
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(65), math.rad(-40))
+		wait()
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(70), math.rad(-30))
+		wait()
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(75), math.rad(-20))
+		wait()
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(80), math.rad(-10))
+		wait()
+		kill = false
+	end)
+	
+	--	Key Binding And Stuff	-------------
+	
+	
+	
+	mouse.KeyDown:connect(function (key)
+		--	Running
+		if string.byte(key) == 48 then
+			if user.Parent:FindFirstChildOfClass("Humanoid") then
+				user.Parent:FindFirstChildOfClass("Humanoid").WalkSpeed = 42
+			end
+			
+			
+			
+			-----Other moves(ETC)
+			
+			
+			
+			
+			------------------------------------------------Grab-----------------------------------
+		elseif key == "g" then
+			left.C1 = cf(0.5, 0.5, 0) * cr(math.rad(-90), math.rad(-70), 0)
+			user.Parent["Left Arm"].Touched:connect(function (otherParts)
+				if otherParts.Name == "Sheild2" then
+					if grabbed == false then
+						local holz = Instance.new("Weld", user.Parent["Left Arm"])
+						holz.Name = "Holdon"
+						holz.Part0 = user.Parent["Left Arm"]
+						holz.Part1 = otherParts
+						holz.C0 = user.Parent["Left Arm"].CFrame:inverse()
+						holz.C1 = otherParts.CFrame:inverse()
+						grabbed = true
+						
+						--	Unachoring and welding
+						local sheld = otherParts.Parent:GetChildren()
+						
+						for i, partz in pairs(sheld) do
+							if partz.ClassName == "Part" then
+								local glutton = Instance.new("Weld", otherParts)
+								glutton.Name = "Glue"
+								glutton.Part0 = partz
+								glutton.Part1 = otherParts
+								glutton.C0 = partz.CFrame:inverse()
+								glutton.C1 = otherParts.CFrame:inverse()
+								partz.Anchored = false
+							end
+						end
+						otherParts.Anchored = false
+						
+						--- What if grabbed
+					elseif grabbed == true then
+						if user.Parent["Left Arm"]:FindFirstChild("Holdon") == nil then
+							grabbed = false
+						elseif user.Parent["Left Arm"]:FindFirstChild("Holdon") then
+							user.Parent["Left Arm"]:FindFirstChild("Holdon"):Destroy()
+							grabbed = false
+						end
+					end
+				end
+			end)
+			
+			
+			
+			---------------------------------------------------------Sheild making-----------------------------------
+		elseif key == "e" then
+			--	Animation [V]
+			if tool.Parent:FindFirstChild("SheildE") == nil then
+				sh = false
+				sheild = 0
+				user.Anchored = false 
+				root.RootJoint.C1 = cf() * cr(math.rad(-90), 0, math.rad(-270))
+				user.Neck.C1 = cf(0, -0.5, 0) * cr(math.rad(-90), 0, math.rad(-90))
+				tool.GripUp = Vector3.new(0, 1, 0)
+				
+				--	Model made
+				local mozd = Instance.new("Model")
+				mozd.Name = "SheildE"
+				mozd.Parent = workspace
+				wait(0.5)
+				mozd.Parent = tool.Parent
+			--	Sweep
+			repeat
+				wait()
+				if sh == false then
+					right.C1 = cf(-0.5, 0.5, 0) * cr(math.rad(90), 0, math.rad(-90 + (sheild * 12)))
+					sheild = sheild + 1
+					
+					---- Sheild Body
+					local arch = body:Clone()
+					arch.CanCollide = true
+					arch.Anchored = true
+					arch.Name = "Sheild" .. sheild
+					arch.Parent = mozd
+				end
+			until sheild == 31
+			if sheild == 31 then
+				sheild = 0
+				sh = true
+				user.Anchored = false
+				right.C1 = cf(-0.5, 0.5, 0) * cr(math.rad(90), 0, math.rad(0))
+				root.RootJoint.C1 = cf(0, 0, 0) * cr(math.rad(-90), 0, math.rad(-180))
+				user.Neck.C1 = cf(0, -0.5, 0) * cr(math.rad(-90), 0, math.rad(-180))
+				wait(0.1)
+				right.C1 = cf(-0.5, 0.5, 0) * cr(math.rad(90), 0, math.rad(-90))
+				sheild = 0
+			end
+			end
+			
+			
+			
+			
+			
+			----------------------------------------------Shield maker-------------------------------------------------
+		elseif key == "f" then
+			
+			--	Do it
+			right.C1 =cf(-0.5, 0.5, 0) * cr(math.rad(90), 0, math.rad(-90)) -- Arm's right up!
+			
+			
+			--	Functions
+			tool.GripUp = Vector3.new(0, 1, 0)
+			local mod = Instance.new("Model")
+			mod.Name = "Shield Dash"
+			mod.Parent = workspace
+			right.C1 =cf(-0.5, 0.5, 0) * cr(math.rad(90), 0, math.rad(-90))
+			tool.GripUp = Vector3.new(0, 0, 1)
+			
+			---- REPEATING PART!
+			repeat
+				wait()
+				
+				-- Torso spin
+				root.RootJoint.C1 = cf(0, 0, 0) * cr(math.rad(-90), math.rad(0), math.rad(-180 + (med * 12)))
+				
+				
+				kill = true
+				-- The body
+				local arch = body:Clone()
+				arch.CanCollide = false
+				arch.Anchored = true
+				arch.Name = "Shld" .. med
+				arch.Parent = mod
+				
+				-- The edge
+				local srp = pointy:Clone()
+				srp.CanCollide = false
+				srp.Anchored = true
+				srp.Name = "edgez" .. med
+				srp.Parent = mod
+				
+				
+				med = med + 1
+			until		med == 31
+			root.RootJoint.C1 = cf(0, 0, 0) * cr(math.rad(-90), math.rad(0), math.rad(-180))
+			tool.GripUp = Vector3.new(0, 1, 0)
+			if med == 31 then
+				wait(0.1)
+				kill = false
+				
+				print('Doing it')
+				med = 0
+				wait(0.5)
+				local prn = mod:GetChildren()
+				for i, partz in pairs(prn) do -- A Start
+					if partz.ClassName == "Part" then
+						partz.Transparency = 0.5
+						wait(0.05)
+						partz.Transparency = 1
+						wait(0.05)
+						partz:Destroy()
+					elseif partz.ClassName == "WedgePart" then
+						partz.Transparency = 0.5
+						wait(0.05)
+						partz.Transparency = 1
+						wait(0.05)
+						partz:Destroy()
+					end
+				end -- A end
+				mod:Destroy()
+			end
+			
+			
+			
+			
+			
+			----------------------------------------Dash!------------------------------------
+		elseif key == "q" then
+			----	Kill true
+
+			kill = true
+			user["Right Shoulder"].C1 =cf(-0.5, 0.5, 0) * cr(math.rad(90), 0, math.rad(-110))
+			tool.GripUp = Vector3.new(0, 0, 1)
+			root.RootJoint.C1 = cf(0, 0, 0) * cr(math.rad(-90), 0, math.rad(-270))
+			user.Neck.C1 = cf(0, -0.5, 0) * cr(math.rad(-90), 0, math.rad(-90))
+			legL.Part0 = tor
+			legR.Part0 = tor
+			left.C1 = cf(0.5, 0.5, 0) * cr(math.rad(70), math.rad(-130), math.rad(40))
+			
+			----	Check for the HEALTH
+			if user.Parent:FindFirstChildOfClass("Humanoid") then
+				user.Parent:FindFirstChildOfClass("Humanoid").WalkSpeed = 72
+			elseif user.Parent:FindFirstChildOfClass("Humanoid") == nil then
+				print('#cri')
+			end
+			--	Wait for the dash to stop!
+			
+			local move = Instance.new("BodyThrust", tor)
+			move.Force = Vector3.new(3000, 0, 0)
+			wait(2)
+			move:remove()
+			--	Stop the dashing!!1
+			root.RootJoint.C1 = cf(0, 0, 0) * cr(math.rad(-90), 0, math.rad(-180))
+			user.Neck.C1 = cf(0, -0.5, 0) * cr(math.rad(-90), 0, math.rad(-180))
+			user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(80), math.rad(20))
+			left.C1 = cf(0.5, 0.5, 0) * cr(0, math.rad(-70), math.rad(-40))
+			legL.Part0 = user
+			legR.Part0 = user
+			
+			----	Check for the health
+			if user.Parent:FindFirstChildOfClass("Humanoid") then
+				user.Parent:FindFirstChildOfClass("Humanoid").WalkSpeed = 16
+			elseif user.Parent:FindFirstChildOfClass("Humanoid") == nil then
+				print('#cri')
+			end
+			kill = false
+			tool.GripUp = Vector3.new(0, 1, 0)
+			--	End of dash
+		end
+	end)
+	
+	mouse.KeyUp:connect(function (key)
+		--	Running stopped
+		if string.byte(key) == 48 then
+			if user.Parent:FindFirstChildOfClass("Humanoid") then
+				user.Parent:FindFirstChildOfClass("Humanoid").WalkSpeed = 16
+			end
+		end
+	end)
+	
+	--	Unequipping the tool
+	tool.Unequipped:connect(function ()
+		right.Part0 = user
+		user["Right Shoulder"].C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.Angles(0, math.rad(90), math.rad(0))
+		left.Part0 = user
+		used.HumanoidRootPart.RootJoint.C1 = cf(0, 0, 0) * cr(math.rad(-90), 0, math.rad(-180))
+		user["Left Shoulder"].C1 = CFrame.new(0.5, 0.5, 0) * CFrame.Angles(0, math.rad(-90), math.rad(0))
+		kill = false
+	end)
+end)
+
+
+
+
+
+-----------	Hurting Part
+body.Touched:connect(function (Player)
+	if kill == true then
+		if Player.Parent:FindFirstChildOfClass("Humanoid") then
+			Player.Parent:FindFirstChildOfClass("Humanoid"):TakeDamage(math.random(15.2, 32.2))
+		end
+	elseif kill == false then
+		wait()
+	end
+end)
+
+pointy.Touched:connect(function (Player)
+	if kill == true then
+		if Player.Parent:FindFirstChildOfClass("Humanoid") then
+			Player.Parent:FindFirstChildOfClass("Humanoid"):TakeDamage(math.random(31.9, 48.2))
+		end
+	elseif kill == false then
+		wait()
+	end
+end)
